@@ -1,0 +1,28 @@
+[Unit]
+Description=Astra Linux Security Monitor
+After=network.target
+StartLimitIntervalSec=0
+
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/local/bin/astra-monitor
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=astra-monitor
+
+
+# Защита сервиса
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadOnlyDirectories=/
+ReadWriteDirectories=/var/log
+
+
+[Install]
+WantedBy=multi-user.target
